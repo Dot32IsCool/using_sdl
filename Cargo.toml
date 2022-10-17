@@ -1,0 +1,12 @@
+[package]
+name = "using_sdl"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+sdl2 = "0.35.2"
+# bytemuck = "1"
+# ogl33 = { version = "0.3.0", features = ["debug_error_checks"]}
+# imagine = "0.2.0"

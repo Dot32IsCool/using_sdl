@@ -4,20 +4,32 @@ use sdl2::keyboard::Keycode;
 use std::time::Duration;
 
 fn main() -> Result<(), String> {
+    // Show logs from wgpu
+    env_logger::init();
+
     let sdl_context = sdl2::init()?;
     let video_subsystem = sdl_context.video()?;
-
-    let window = video_subsystem.window("SDL2 my beloved", 800, 600)
+    let window = video_subsystem
+        .window("SDL2 my beloved", 800, 600)
         .position_centered()
+        .resizable()
         .build()
-        .expect("could not initialize video subsystem");
+        .map_err(|e| e.to_string())?;
+    let (width, height) = window.size();
 
-    let mut canvas = window.into_canvas().build()
-        .expect("could not make a canvas");
+    let instance = wgpu::Instance::new(wgpu::Backends::GL); //I am unsure why PRIMARY is panicking here
+    let surface = unsafe { instance.create_surface(&window) };
+
+    let mut canvas = window
+        .into_canvas()
+        .present_vsync()
+        .build()
+        .map_err(|e| e.to_string())?;
 
     canvas.set_draw_color(Color::RGB(0, 255, 255));
     canvas.clear();
     canvas.present();
+
     let mut event_pump = sdl_context.event_pump()?;
     let mut i = 0;
     'running: loop {

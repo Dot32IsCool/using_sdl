@@ -6,7 +6,11 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-sdl2 = "0.35.2"
+# sdl2 = "0.35.2"
+sdl2 = { version="0.35.2", features = ["raw-window-handle"] }
 # bytemuck = "1"
 # ogl33 = { version = "0.3.0", features = ["debug_error_checks"]}
 # imagine = "0.2.0"
+env_logger = "0.9"
+log = "0.4"
+wgpu = "0.13.1"
